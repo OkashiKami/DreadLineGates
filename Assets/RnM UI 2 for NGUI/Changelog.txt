@@ -1,0 +1,23 @@
+Version 1.5:
+- Updated for NGUI v3.7.9
+- Made a temporary fix for the dagging issue, the problem is originating from an NGUI script.
+
+Version 1.4:
+- Updated the characters select scene windows.
+- Updated the UIWindow script to execute in edit mode.
+
+Version 1.3:
+- Updated for NGUI v3.7.8
+- Fixed the auto depth script.
+- Added new name index appending script.
+- Fixed the depth of some window widgets.
+- Removed script UISpriteFlippable.
+- Fixed window backgrounds by using dual background sprites, one sliced and once tiled.
+- Fixed some slot issues.
+
+Version 1.2:
+- Removed legacy anchors.
+- Fixed drap and drop functionality.
+
+Version 1.1:
+- Hotfix for NGUI v3.6.9
