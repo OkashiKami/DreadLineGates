@@ -4,6 +4,7 @@ using System;
 using UnityEngine.SceneManagement;
 using System.Net.Sockets;
 using System.Net;
+using System.Text;
 
 public class FUNCTIONS
 {
@@ -22,16 +23,14 @@ public class FUNCTIONS
     {
         infolable.text = "Please Wait...\nStarting in 10s...";
         yield return new WaitForSeconds(10);
-        infolable.text = "Please Wait...\nConnecting to our master server...";
-        yield return new WaitForSeconds(3);
         GameControl.client = new Client();
-        infolable.text = "Please Wait...\nCreating Server Socket...";
+        infolable.text = "Please Wait...\nCreating client Socket...";
         GameControl.client.socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         yield return new WaitForSeconds(3);
         infolable.text = "Please Wait...\nCreating IPEndpoint...";
         GameControl.client.endpoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 2655);
         yield return new WaitForSeconds(4);
-        infolable.text = "Please Wait...\nConnecting...";
+        infolable.text = "Please Wait...\nConnecting to our master server...";
         yield return new WaitForSeconds(3);
         try
         {
@@ -57,7 +56,8 @@ public class FUNCTIONS
         string u = user.value;
         string p = pass.value;
 
-        return string.Format("Loggin in with {0} as username and {1} as password", u, p);
+        GameControl.client.Send(u, p);
+        return string.Empty;
     }
 }
 
@@ -65,4 +65,17 @@ public class Client
 {
     internal Socket socket;
     internal IPEndPoint endpoint;
+
+    public void Send(string user, string pass)
+    {
+        try
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes("logininfo=" + user + ":" + pass);
+            socket.Send(buffer, 0, buffer.Length, SocketFlags.None);
+        }
+        catch
+        {
+
+        }
+    }
 }
