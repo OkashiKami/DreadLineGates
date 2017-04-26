@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
+using System.Net.Sockets;
 
 public class GameControl : MonoBehaviour
 {
@@ -29,7 +30,6 @@ public class GameControl : MonoBehaviour
     {
 	    for(int i = 0; i < functionList.Count; i++)
         {
-            Debug.Log(functionList[i](true));
             functionList.RemoveAt(i);
         }
 	}
@@ -47,5 +47,11 @@ public class GameControl : MonoBehaviour
                 break;
         }
     }
-   
+
+    void OnApplicationQuit()
+    {
+        try { client.socket.Shutdown(SocketShutdown.Both); } catch { }
+        try { client.socket.Close(); } catch { }
+        try { client.isConnected = false; } catch { }
+    }
 }

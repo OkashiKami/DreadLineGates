@@ -39,7 +39,7 @@ public class Button : MonoBehaviour
                 GameControl.functionList.Add(delegate { return FUNCTIONS.ConnectionScene(); });
                 break;
             case ButtonType.Login:
-
+                GameControl.functionList.Add(delegate { return FUNCTIONS.SubmitLogin(FindObjectOfType<LoginUI>().Get); });
                 break;
         }
     }
