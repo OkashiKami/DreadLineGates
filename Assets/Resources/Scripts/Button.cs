@@ -30,6 +30,7 @@ public class Button : MonoBehaviour
             GetComponentInChildren<UILabel>().text = buttonType != ButtonType.None ? buttonType.ToString() : "";
     }
 
+
     public void click()
     {
         switch(buttonType)
